@@ -11,7 +11,7 @@ public class JenkinsController {
 		return "Hello from Jenkins Controller class";
 	}
 	
-	@RequestMapping("byejenkins")
+	@RequestMapping(value = "byejenkins", method = RequestMethod.GET)
 	public String bye() {
 		return "Bye from Jenkins Controller class";
 	}
