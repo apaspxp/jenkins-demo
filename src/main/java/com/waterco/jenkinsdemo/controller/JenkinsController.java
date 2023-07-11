@@ -13,7 +13,7 @@ public class JenkinsController {
 	
 	@RequestMapping(value = "byejenkins", method = RequestMethod.GET)
 	public String bye() {
-		return "Bye from Jenkins Controller class.";
+		return "Bye from Jenkins Controller class...";
 	}
 	
 	@RequestMapping("testjenkins")
