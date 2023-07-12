@@ -8,7 +8,7 @@ public class JenkinsController {
 
 	@RequestMapping("hellojenkins")
 	public String hello() {
-		return "Hello from Jenkins Controller class";
+		return "Hello from Jenkins Controller class.";
 	}
 	
 	@RequestMapping(value = "byejenkins", method = RequestMethod.GET)
@@ -18,10 +18,6 @@ public class JenkinsController {
 	
 	@RequestMapping("testjenkins")
 	public String testJenkins() {
-		return "Test from Jenkins Controller class. Adding some more text for demo second time.";
-	}
-	@RequestMapping(value = "buildjenkins", method = RequestMethod.GET)
-	public String buidjenkins() {
-		return "build this Jenkins Controller class.";
+		return "Test from Jenkins Controller class. Adding some more text for demo second time...";
 	}
 }
