@@ -21,7 +21,7 @@ public class JenkinsController {
 		return "Test from Jenkins Controller class. Adding some more text for demo second time.";
 	}
 	@RequestMapping(value = "buildjenkins", method = RequestMethod.GET)
-	public String bye() {
+	public String buidjenkins() {
 		return "build this Jenkins Controller class.";
 	}
 }
