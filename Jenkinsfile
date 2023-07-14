@@ -10,26 +10,26 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Build Jenkinsfiles') {
-            steps {
-              script {
-          // List of Jenkinsfiles to build
-              def jenkinsfiles = [
-              "Jenkinsfile1",
-              "Jenkinsfile2",
-              "Jenkinsfile3"
-            ]
+    //     stage('Build Jenkinsfiles') {
+    //         steps {
+    //           script {
+    //       // List of Jenkinsfiles to build
+    //           def jenkinsfiles = [
+    //           "Jenkinsfile1",
+    //           "Jenkinsfile2",
+    //           "Jenkinsfile3"
+    //         ]
           
-              for (def jenkinsfile in jenkinsfiles) {
-            // Load and build each Jenkinsfile
-               node {
-               checkout scm
-               load "${jenkinsfile}"
-            }
-          }
-        }
-      }
-    }
+    //           for (def jenkinsfile in jenkinsfiles) {
+    //         // Load and build each Jenkinsfile
+    //            node {
+    //            checkout scm
+    //            load "${jenkinsfile}"
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
     
