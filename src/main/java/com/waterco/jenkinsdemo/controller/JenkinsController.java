@@ -23,6 +23,6 @@ public class JenkinsController {
 	}
 	@RequestMapping(value = "buildjenkins", method = RequestMethod.GET)
 	public String buildJenkins() {
-		return "Build jenkins from Jenkins Controller class.";
+		return "Build jenkins from Jenkins Controller class....";
 	}
 }
