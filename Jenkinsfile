@@ -1,29 +1,15 @@
-pipeline {
-  agent any
-  
-  stages {
-    stage('Checkout') {
-      steps {
-        git 'https://github.com/apaspxp/jenkins-demo'
-      }
+pipeline{
+    agent any
+    tools{
+        maven 'maven'
     }
-    
-    stage('Build') {
-      steps {
-        sh 'mvn clean install'
-      }
+    stages{
+        stage('build maven'){
+            steps{
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_credential', url: 'https://github.com/apaspxp/jenkins-demo']])
+                sh 'mvn clean install'
+            }
+        }
     }
-    
-    stage('Test') {
-      steps {
-        sh 'mvn test'
-      }
-    }
-    
-    stage('Deploy') {
-      steps {
-        sh 'mvn clean package'
-      }
-    }
-  }
 }
+    
