@@ -21,7 +21,7 @@ pipeline{
                   // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
 //                   sh 'docker images'
               script {
-                       def dockerImage = docker.build('my-docker-image:${env.BUILD_NUMBER}')
+                       def dockerImage = docker.build('Jenkins-demo')
                                 dockerImage.push()
                      }
 
