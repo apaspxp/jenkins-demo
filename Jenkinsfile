@@ -18,12 +18,13 @@ pipeline{
         }
         stage('Docker') {
             steps {
+                  // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
+//                   sh 'docker images'
               script {
                        def dockerImage = docker.build('my-docker-image:${env.BUILD_NUMBER}')
                                 dockerImage.push()
                      }
-                // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
-                sh 'docker images'
+
             }
         }
     //     stage('Build Jenkinsfiles') {
