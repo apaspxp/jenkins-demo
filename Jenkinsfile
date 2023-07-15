@@ -19,7 +19,6 @@ pipeline{
         stage('Docker') {
             steps {
                 // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
-                // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
                 sh 'docker images'
             }
         }
