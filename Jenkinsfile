@@ -10,6 +10,12 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
+        stage('Docker') {
+            steps {
+                // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
+                sh 'docker images'
+            }
+        }
     //     stage('Build Jenkinsfiles') {
     //         steps {
     //           script {
@@ -19,7 +25,6 @@ pipeline{
     //           "Jenkinsfile2",
     //           "Jenkinsfile3"
     //         ]
-          
     //           for (def jenkinsfile in jenkinsfiles) {
     //         // Load and build each Jenkinsfile
     //            node {
