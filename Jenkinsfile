@@ -21,11 +21,11 @@ pipeline{
                   // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
 //                   sh 'docker images'
               script {
-                        def dockerImageTag = "my-docker-image:${env.BUILD_NUMBER}"
-                                     sh "docker build -t ${dockerImageTag} ."
+                       def dockerImageTag = "my-docker-image:${env.BUILD_NUMBER}"
+                                          sh "docker build -t ${dockerImageTag} ."
 
-                                     // Optionally, print the Docker image tag
-                                     sh "echo 'Docker image tag: ${dockerImageTag}'"
+                                          // Optionally, print the Docker image tag
+                                          echo "Docker image tag: ${dockerImageTag}"
                      }
 
             }
