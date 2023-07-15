@@ -16,13 +16,13 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Docker') {
+        stage('Docker Build') {
             steps {
                   // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
 //                   sh 'docker images'
               script {
-                       def dockerImage = docker.build('my-docker-image:${env.BUILD_NUMBER}')
-                                dockerImage.push()
+                       def dockerImage = docker.build('jenkins-demo')
+                                // dockerImage.push()
                      }
 
             }
