@@ -16,7 +16,7 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Docker') {
+        stage('Docker Build') {
             steps {
                   // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
 //                   sh 'docker images'
