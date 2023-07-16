@@ -12,10 +12,10 @@ pipeline{
 //         }
         stage('Build Docker Image') {
             steps {
+                // Generate a timestamp or version number for the image tag
+                def timestamp = new Date().format("yyyyMMdd_HHmmss")
+                def imageTag = "jenkins-demo:${timestamp}"
                 withCredentials([usernamePassword(credentialsId: 'DockerHub_Credential', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    // Generate a timestamp or version number for the image tag
-                    def timestamp = new Date().format("yyyyMMdd_HHmmss")
-                    def imageTag = "jenkins-demo:${timestamp}"
                     // Build the Docker image using the spring-boot:build-image Maven goal
                     sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/${imageTag}"
 
