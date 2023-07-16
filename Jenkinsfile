@@ -16,19 +16,15 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage('Docker') {
-            steps {
-                  // Deploy Docker image to a container orchestration platform (e.g., Kubernetes)
-//                   sh 'docker images'
-              script {
-                       def dockerImageTag = "my-docker-image:${env.BUILD_NUMBER}"
-                                          sh "docker build -t ${dockerImageTag} ."
+        stage('Build Docker Image') {
+                    steps {
+                        // Build the Docker image using the spring-boot:build-image Maven goal
+                        sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
 
-                                          // Optionally, print the Docker image tag
-                                          echo "Docker image tag: ${dockerImageTag}"
-                     }
-
-            }
+                        // Push the Docker image to a registry
+                        sh "docker push apaspxp/jenkins-demo:latest"
+                    }
+                }
         }
     //     stage('Build Jenkinsfiles') {
     //         steps {
