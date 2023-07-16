@@ -23,7 +23,8 @@ pipeline{
 //                         sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
 
                         // Log in to Docker Hub using the credentials
-                        sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+//                         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+                        sh "docker login --username $DOCKERHUB_USERNAME --password-stdin"
 
                         // Push the Docker image to a registry
                         sh "docker push apaspxp/${imageTag}"
