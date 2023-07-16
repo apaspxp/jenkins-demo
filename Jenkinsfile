@@ -43,9 +43,9 @@ pipeline{
         stage('Deploy to Kubernetes'){
                 steps{
                    script{
-                       sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
+//                        sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
+                         sh "kubectl get all"
                 }
-
              }
           }
   }
