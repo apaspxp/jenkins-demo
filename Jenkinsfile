@@ -47,9 +47,7 @@ pipeline{
 //                          sh "kubectl get all"
 //                 }
                 script {
-                withCredentials([
-                                        usernamePassword(credentialsId: 'DockerHub_Credential', usernameVariable: 'KUBERNETES_USERNAME', passwordVariable: 'KUBERNETES_PASSWORD')
-                                    ]) {
+                withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
                                     def imageName = 'jenkins-demo:latest'
                                     def deploymentName = 'my-deployment'
                                     def containerName = 'my-container'
@@ -75,7 +73,8 @@ pipeline{
                                                 - containerPort: 8081
                                       """
 
-                                    sh "echo '$yamlContent' | kubectl apply -f -"
+                                    sh "kubectl --kubeconfig=${KUBECONFIG} get pods"
+                                    sh "echo '$yamlContent' | kubectl --kubeconfig=${KUBECONFIG} apply -f -"
                     }
                 }
              }
