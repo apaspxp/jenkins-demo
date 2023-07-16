@@ -12,28 +12,30 @@ pipeline{
 //         }
         stage('Build Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHub_Credential', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    // Generate a timestamp or version number for the image tag
-                    def timestamp = new Date().format("yyyyMMdd_HHmmss")
-//                     def imageTag = "jenkins-demo:${timestamp}"
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'DockerHub_Credential', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        // Generate a timestamp or version number for the image tag
+                        def timestamp = new Date().format("yyyyMMdd_HHmmss")
+    //                     def imageTag = "jenkins-demo:${timestamp}"
 
-                    // Build the Docker image using the spring-boot:build-image Maven goal
-//                     sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/${imageTag}"
-                    sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
+                        // Build the Docker image using the spring-boot:build-image Maven goal
+    //                     sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/${imageTag}"
+                        sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
 
-                    // Log in to Docker Hub using the credentials
-                    sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+                        // Log in to Docker Hub using the credentials
+                        sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
 
-                    // Push the Docker image to a registry
-//                     sh "docker push apaspxp/${imageTag}"
-                    sh "docker push apaspxp/jenkins-demo:latest"
+                        // Push the Docker image to a registry
+    //                     sh "docker push apaspxp/${imageTag}"
+                        sh "docker push apaspxp/jenkins-demo:latest"
 
-                    // Tag the image as "latest"
-//                     sh "docker tag apaspxp/${imageTag} apaspxp/jenkins-demo:latest"
-//                     sh "docker push apaspxp/jenkins-demo:latest"
+                        // Tag the image as "latest"
+    //                     sh "docker tag apaspxp/${imageTag} apaspxp/jenkins-demo:latest"
+    //                     sh "docker push apaspxp/jenkins-demo:latest"
 
-                    // Print the image tag for reference
-//                     echo "Docker image tag: ${imageTag}"
+                        // Print the image tag for reference
+    //                     echo "Docker image tag: ${imageTag}"
+                    }
                 }
             }
         }
