@@ -42,10 +42,38 @@ pipeline{
         }
         stage('Deploy to Kubernetes'){
                 steps{
-                   script{
-//                        sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
-                         sh "kubectl get all"
-                }
+//                    script{
+// //                        sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
+//                          sh "kubectl get all"
+//                 }
+                    script {
+                        def imageName = 'jenkins-demo:latest'
+                        def deploymentName = 'my-deployment'
+                        def containerName = 'my-container'
+                        def yamlContent = """
+                            apiVersion: apps/v1
+                            kind: Deployment
+                            metadata:
+                              name: ${deploymentName}
+                            spec:
+                              replicas: 1
+                              selector:
+                                matchLabels:
+                                  app: ${deploymentName}
+                              template:
+                                metadata:
+                                  labels:
+                                    app: ${deploymentName}
+                                spec:
+                                  containers:
+                                  - name: ${containerName}
+                                    image: ${imageName}
+                                    ports:
+                                    - containerPort: 8080
+                          """
+
+                        kubectlApply(configs: yamlContent)
+                    }
              }
           }
   }
