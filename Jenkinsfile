@@ -46,34 +46,34 @@ pipeline{
 // //                        sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
 //                          sh "kubectl get all"
 //                 }
-                    script {
-                        def imageName = 'jenkins-demo:latest'
-                        def deploymentName = 'my-deployment'
-                        def containerName = 'my-container'
-                        def yamlContent = """
-                            apiVersion: apps/v1
-                            kind: Deployment
+                script {
+                    def imageName = 'jenkins-demo:latest'
+                    def deploymentName = 'my-deployment'
+                    def containerName = 'my-container'
+                    def yamlContent = """
+                        apiVersion: apps/v1
+                        kind: Deployment
+                        metadata:
+                          name: ${deploymentName}
+                        spec:
+                          replicas: 1
+                          selector:
+                            matchLabels:
+                              app: ${deploymentName}
+                          template:
                             metadata:
-                              name: ${deploymentName}
+                              labels:
+                                app: ${deploymentName}
                             spec:
-                              replicas: 1
-                              selector:
-                                matchLabels:
-                                  app: ${deploymentName}
-                              template:
-                                metadata:
-                                  labels:
-                                    app: ${deploymentName}
-                                spec:
-                                  containers:
-                                  - name: ${containerName}
-                                    image: ${imageName}
-                                    ports:
-                                    - containerPort: 8080
-                          """
+                              containers:
+                              - name: ${containerName}
+                                image: ${imageName}
+                                ports:
+                                - containerPort: 8081
+                      """
 
-                        kubectlApply(configs: yamlContent)
-                    }
+                    sh "echo '$yamlContent' | kubectl apply -f -"
+                }
              }
           }
   }
