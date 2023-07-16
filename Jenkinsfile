@@ -43,7 +43,7 @@ pipeline{
         stage('Deploy to Kubernetes'){
                 steps{
                    script{
-                       sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo:latest"
+                       sh "kubectl create deployment jenkins-demo-deployment --image=jenkins-demo"
                 }
 
              }
