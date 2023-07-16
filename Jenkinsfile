@@ -24,7 +24,7 @@ pipeline{
 
                         // Log in to Docker Hub using the credentials
 //                         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
-                        sh "docker login --username $DOCKERHUB_USERNAME --password-stdin"
+                        sh "echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin"
 
                         // Push the Docker image to a registry
                         sh "docker push apaspxp/${imageTag}"
