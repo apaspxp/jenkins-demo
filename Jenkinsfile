@@ -12,11 +12,16 @@ pipeline{
         }
         stage('Build Docker Image') {
             steps {
-                // Build the Docker image using the spring-boot:build-image Maven goal
-                sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
+                withCredentials([usernamePassword(credentialsId: 'DockerHub_Credential', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                    // Build the Docker image using the spring-boot:build-image Maven goal
+                    sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=apaspxp/jenkins-demo:latest"
 
-                // Push the Docker image to a registry
-                sh "docker push apaspxp/jenkins-demo:latest"
+                    // Log in to Docker Hub using the credentials
+                    sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+
+                    // Push the Docker image to a registry
+                    sh "docker push apaspxp/jenkins-demo:latest"
+                }
             }
         }
   }
