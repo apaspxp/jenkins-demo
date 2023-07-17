@@ -49,8 +49,8 @@ pipeline{
                 script {
                 withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
                                     def imageName = 'jenkins-demo:latest'
-                                    def deploymentName = 'my-deployment'
-                                    def containerName = 'my-container'
+//                                     def deploymentName = 'my-deployment'
+//                                     def containerName = 'my-container'
                                     // def yamlContent = """
                                     //     apiVersion: apps/v1
                                     //     kind: Deployment
@@ -75,7 +75,7 @@ pipeline{
 
                                     sh "kubectl --kubeconfig=${KUBECONFIG} get pods"
                                     sh "echo '$yamlContent' | kubectl --kubeconfig=${KUBECONFIG} apply -f -"
-                                    sh "kubectl apply -f services.yaml"
+                                    sh "kubectl apply -f C:\Users\rajes\Spring_WS\jenkins-demo\services.yml"
                     }
                 }
              }
