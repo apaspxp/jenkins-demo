@@ -32,10 +32,10 @@ metadata:
   name: jenkins-demo
 spec:
   ports:
-    - name: 8080-8080
-      port: 8080
+    - name: 8081-8081
+      port: 8081
       protocol: TCP
-      targetPort: 8080
+      targetPort: 8081
   selector:
     app: jenkins-demo
   type: NodePort
