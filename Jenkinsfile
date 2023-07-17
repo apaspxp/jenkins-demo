@@ -45,7 +45,7 @@ pipeline{
                     script {
                         withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
 //                         Cleanup the resources
-                                sh "kubectl delete -f services.yml"
+                                sh "kubectl delete -f services.yml --ignore-not-found"
 //                         Apply the new manifest file
                                 sh "kubectl apply -f services.yml"
                             }
