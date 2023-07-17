@@ -75,7 +75,7 @@ pipeline{
 
                                     sh "kubectl --kubeconfig=${KUBECONFIG} get pods"
                                     sh "echo '$yamlContent' | kubectl --kubeconfig=${KUBECONFIG} apply -f -"
-                                    sh "kubectl apply -f C:\Users\rajes\Spring_WS\jenkins-demo\services.yml"
+                                    sh "kubectl apply -f jenkins-demo\services.yml"
                     }
                 }
              }
