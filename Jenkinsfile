@@ -42,12 +42,14 @@ pipeline{
         }
         stage('Deploy to Kubernetes'){
                 steps{
-                script {
-                withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
-                                    sh "kubectl delete -f services.yml"
-                                    sh "kubectl apply -f services.yml"
-                    }
-                  }
+                    script {
+                        withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
+//                         Cleanup the resources
+                                sh "kubectl delete -f services.yml"
+//                         Apply the new manifest file
+                                sh "kubectl apply -f services.yml"
+                            }
+                      }
                 }
               }
             }
