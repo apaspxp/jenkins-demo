@@ -44,9 +44,7 @@ pipeline{
                 steps{
                 script {
                 withCredentials([file(credentialsId: 'Kubernetes_Credentials', variable: 'KUBECONFIG')]) {
-//                                     def imageName = 'jenkins-demo:latest'
-//                                     sh "kubectl --kubeconfig=${KUBECONFIG}"
-//                                     sh "echo kubectl --kubeconfig=${KUBECONFIG} apply -f -"
+                                    sh "kubectl delete -f services.yml"
                                     sh "kubectl apply -f services.yml"
                     }
                   }
