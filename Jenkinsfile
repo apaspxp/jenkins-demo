@@ -71,7 +71,7 @@ pipeline{
 
                                     sh "kubectl --kubeconfig=${KUBECONFIG}"
                                     sh "echo kubectl --kubeconfig=${KUBECONFIG} apply -f -"
-                                    sh "pwd"
+//                                     sh "pwd"
                                     sh "kubectl apply -f services.yml"
                     }
                 }
