@@ -73,8 +73,8 @@ pipeline{
                                     //             - containerPort: 8081
                                     //   """
 
-                                    sh "kubectl --kubeconfig=${KUBECONFIG} get pods"
-                                    sh "echo '$yamlContent' | kubectl --kubeconfig=${KUBECONFIG} apply -f -"
+                                    sh "kubectl --kubeconfig=${KUBECONFIG}"
+                                    sh "echo kubectl --kubeconfig=${KUBECONFIG} apply -f -"
                                     sh "kubectl apply -f jenkins-demo/services.yml"
                     }
                 }
