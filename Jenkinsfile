@@ -75,7 +75,7 @@ pipeline{
 
                                     sh "kubectl --kubeconfig=${KUBECONFIG}"
                                     sh "echo kubectl --kubeconfig=${KUBECONFIG} apply -f -"
-                                    sh "kubectl apply -f jenkins-demo/services.yml"
+                                    sh "kubectl apply services.yml"
                     }
                 }
              }
