@@ -51,30 +51,31 @@ pipeline{
                                     def imageName = 'jenkins-demo:latest'
                                     def deploymentName = 'my-deployment'
                                     def containerName = 'my-container'
-                                    def yamlContent = """
-                                        apiVersion: apps/v1
-                                        kind: Deployment
-                                        metadata:
-                                          name: ${deploymentName}
-                                        spec:
-                                          replicas: 1
-                                          selector:
-                                            matchLabels:
-                                              app: ${deploymentName}
-                                          template:
-                                            metadata:
-                                              labels:
-                                                app: ${deploymentName}
-                                            spec:
-                                              containers:
-                                              - name: ${containerName}
-                                                image: ${imageName}
-                                                ports:
-                                                - containerPort: 8081
-                                      """
+                                    // def yamlContent = """
+                                    //     apiVersion: apps/v1
+                                    //     kind: Deployment
+                                    //     metadata:
+                                    //       name: ${deploymentName}
+                                    //     spec:
+                                    //       replicas: 1
+                                    //       selector:
+                                    //         matchLabels:
+                                    //           app: ${deploymentName}
+                                    //       template:
+                                    //         metadata:
+                                    //           labels:
+                                    //             app: ${deploymentName}
+                                    //         spec:
+                                    //           containers:
+                                    //           - name: ${containerName}
+                                    //             image: ${imageName}
+                                    //             ports:
+                                    //             - containerPort: 8081
+                                    //   """
 
                                     sh "kubectl --kubeconfig=${KUBECONFIG} get pods"
                                     sh "echo '$yamlContent' | kubectl --kubeconfig=${KUBECONFIG} apply -f -"
+                                    sh "kubectl apply -f services.yaml"
                     }
                 }
              }
