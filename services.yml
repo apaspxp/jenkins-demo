@@ -1,24 +1,43 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: my-pod
+  creationTimestamp: null
+  labels:
+    app: jenkins-demo
+  name: jenkins-demo
 spec:
-  containers:
-    - name: my-container
-      image: my-image:tag
-      ports:
-        - containerPort: 8080
-
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: jenkins-demo
+    spec:
+      containers:
+        - image: apaspxp/jenkins-demo:latest
+          name: jenkins-demo
+          resources: {}
+status: {}
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  creationTimestamp: null
+  labels:
+    app: jenkins-demo
   name: jenkins-demo
 spec:
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: jenkins-demo
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
   type: NodePort
+status:
+  loadBalancer: {}
